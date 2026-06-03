@@ -3,57 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcoKaizen | Portal de Adquisiciones</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>EcoKaizen | Portal de Gestión</title>
 <style>
-    :root { --ink: #03060f; --gold: #ffd700; --glass: rgba(20, 20, 25, 0.8); }
-    body { background: radial-gradient(circle at center, #1a1a2e 0%, #03060f 100%); font-family: 'Outfit', sans-serif; color: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-    .panel { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--gold); padding: 40px; border-radius: 8px; width: 100%; max-width: 450px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); }
-    h2 { font-family: 'Bebas Neue'; color: var(--gold); letter-spacing: 3px; margin-bottom: 5px; font-size: 28px; text-transform: uppercase; text-align: center; }
-    .manual { font-size: 10px; color: #888; text-align: center; margin-bottom: 25px; border-top: 1px solid #333; pt: 10px; }
-    label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); display: block; margin-bottom: 8px; }
-    input, textarea, select { width: 100%; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid #333; border-radius: 4px; color: white; margin-bottom: 20px; box-sizing: border-box; }
-    .btn-pro { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 16px; width: 100%; font-family: 'Bebas Neue'; font-size: 18px; letter-spacing: 2px; cursor: pointer; transition: 0.4s; }
-    .btn-pro:hover { background: var(--gold); color: var(--ink); }
+    :root { --bg: #0b1120; --card: #161e31; --accent: #3b82f6; --text: #ffffff; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; padding: 20px; }
+    .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .logo { background: var(--accent); padding: 10px; border-radius: 12px; font-weight: bold; }
+    .card { background: var(--card); padding: 20px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #2d3748; }
+    label { color: #94a3b8; font-size: 12px; text-transform: uppercase; }
+    input, select, textarea { width: 100%; background: #0f172a; border: 1px solid #334155; padding: 12px; border-radius: 8px; color: white; margin-top: 5px; box-sizing: border-box; }
+    .btn { background: var(--accent); color: white; padding: 15px; border: none; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
 </style>
 </head>
 <body>
 
-<div class="panel">
-    <h2>ADQUISICIONES</h2>
-    <div class="manual">Protocolo: ORD-YYYY-XXX | Uso exclusivo ECOKAIZEN</div>
-    
-    <label>N° DE ORDEN</label>
-    <input type="text" id="ref" value="ORD-2026-001">
+<div class="header">
+    <div class="logo">EK</div>
+    <div>
+        <div style="font-weight:bold">ECOKAIZEN</div>
+        <div style="font-size: 10px; color: #94a3b8;">CONTROL Y ABASTECIMIENTO</div>
+    </div>
+</div>
 
+<div class="card">
     <label>Proveedor</label>
     <select id="prov">
         <option>Don Pedro (Materiales)</option>
         <option>Almacén Principal</option>
-        <option>Proveedores Varios</option>
     </select>
-
-    <label>Detalle del Lote</label>
-    <textarea id="detalle" rows="6" placeholder="🔹 Ítem 01: [Producto] | [Cantidad]&#10;🔹 Ítem 02: [Producto] | [Cantidad]"></textarea>
-
-    <button class="btn-pro" onclick="enviar()">ENVIAR REQUERIMIENTO FORMAL</button>
+    
+    <label style="margin-top:15px; display:block;">Detalle del Requerimiento</label>
+    <textarea id="detalle" rows="4" placeholder="Ingrese suministros..."></textarea>
+    
+    <button class="btn" onclick="enviar()" style="margin-top: 20px;">GENERAR ORDEN FORMAL</button>
 </div>
 
 <script>
 function enviar() {
-    const ref = document.getElementById('ref').value;
-    const prov = document.getElementById('prov').value;
-    const det = document.getElementById('detalle').value;
-    
-    const msg = `𝐀𝐃𝐐𝐔𝐈𝐒𝐈𝐂𝐈𝐎𝐍𝐄𝐒 | 𝐑𝐄𝐐𝐔𝐄𝐑𝐈𝐌𝐈𝐄𝐍𝐓𝐎 𝐅𝐎𝐑𝐌𝐀𝐋 📑\n` +
-                `Ref: ${ref}\n\n` +
-                `Estimados, un gusto saludarles. Por encargo de 𝐄𝐂𝐎𝐊𝐀𝐈𝐙𝐄𝐍 𝐏𝐀𝐂𝐊, solicitamos la cotización detallada del siguiente lote:\n\n` +
-                `𝐏𝐑𝐎𝐕𝐄𝐄𝐃𝐎𝐑: ${prov}\n\n` +
-                `𝐃𝐄𝐓𝐀𝐋𝐋𝐄 𝐃𝐄 𝐒𝐔𝐌𝐈𝐍𝐈𝐒𝐓𝐑𝐎𝐒:\n` +
-                `━━━━━━━━━━━━━━━━━━\n` +
-                `${det}\n` +
-                `━━━━━━━━━━━━━━━━━━`;
-    
+    const p = document.getElementById('prov').value;
+    const d = document.getElementById('detalle').value;
+    const msg = `🧾 *ECOKAIZEN - ORDEN OFICIAL*\n\n*Proveedor:* ${p}\n*Detalle:* ${d}\n\n*Estado:* PENDIENTE`;
     window.open("https://api.whatsapp.com/send?phone=51949546919&text=" + encodeURIComponent(msg));
 }
 </script>
